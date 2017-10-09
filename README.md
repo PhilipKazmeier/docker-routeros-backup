@@ -9,6 +9,7 @@ The script will connect to all the devices using ssh with the user backup and a 
 
 ## Docker args (required)
 -v $PRIVATE_KEY:/home/app/private.key
+
 -v $LOCAL_DIR/backup.conf:/home/app/backup.conf
 
 ## Docker args (optional)
