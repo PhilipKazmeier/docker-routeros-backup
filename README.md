@@ -7,6 +7,14 @@ The script will connect to all the devices using ssh with the user backup and a 
 
 ## Configuration
 
+To specify the devices that will be backed up can be specified in the `backup.conf` file.
+Each device needs to have its own line that consists of the IP address and the name (for the folder).
+
+Example: 192.168.0.200:Building1/AP-1
+
+
+The Docker container needs some configuration to be able to run:
+
 | description          | required? | args for docker run                             |
 |----------------------|-----------|-------------------------------------------------|
 | private key          | yes       | -v $PRIVATE_KEY:/home/app/private.key           |
