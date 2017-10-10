@@ -5,7 +5,8 @@ It is configured to backup the configuration and a whole system backup at 00:10 
 The script will connect to all the devices using ssh with the user backup and a provided ssh private key.
 
 
-## Docker args
+## Configuration
+
 | description          | required? | args for docker run                             |
 |----------------------|-----------|-------------------------------------------------|
 | private key          | yes       | -v $PRIVATE_KEY:/home/app/private.key           |
@@ -24,6 +25,7 @@ You can import the SSH key in the menu of System > Users > SSH Keys. Pay attenta
 With all configurations applied you could run the container like this:
 ```
 docker run -d \
+	--name routeros-backup \
     -v $(pwd)/id_rsa:/home/app/private.key \
     -v $(pwd)/backup.conf:/home/app/backup.conf \
     -v $(pwd):/home/app/backup \

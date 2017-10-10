@@ -5,13 +5,13 @@ WORKDIR /home/app
 RUN apk update && apk add openssh && rm -rf /var/cache/apk/* 
 
 # Add crontab file in the cron directory
-ADD crontab /var/spool/cron/crontabs/root
+ADD files/crontab /var/spool/cron/crontabs/root
 
 # Give execution rights on the cron job
 RUN chmod 0600 /var/spool/cron/crontabs/root
 
 # copy the backup script
-COPY copyBackup.sh /home/app/
+COPY files/copyBackup.sh /home/app/
  
 # Run the command on container startup
 CMD crond -l 2 -f
