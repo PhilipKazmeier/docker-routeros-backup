@@ -5,6 +5,11 @@ It is configured to backup the configuration and a whole system backup at 00:10 
 The script will connect to all the devices using ssh with the user backup and a provided ssh private key.
 
 
+## Automated Build
+
+[![philipkazmeier/routeros-backup](http://dockeri.co/image/philipkazmeier/routeros-backup)](https://registry.hub.docker.com/u/philipkazmeier/routeros-backup/)
+
+
 ## Configuration
 
 To specify the devices that will be backed up can be specified in the `backup.conf` file.
