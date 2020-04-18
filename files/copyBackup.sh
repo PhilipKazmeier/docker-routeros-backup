@@ -1,10 +1,10 @@
 #!/bin/sh
 
 #
-# Mikrotik SSH Backup script v1.0
+# Mikrotik SSH Backup script 
 #
-
-# Copyright 2017 Philip Kazmeier
+# Copyright Philip Kazmeier
+#
 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,12 +49,14 @@ function backup() {
     local IP=$1
     local DIR=$2
 
+    echo "> Create backup of configuration and system"
     ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@$IP "$CMD" 
 
     if [[ $? != 0 ]]; then
         (>&2 echo "SSH failed for $IP")
     fi
 
+    echo "> Copy files to the backup server"
     for FILE in $EXPFILE $BKPFILE
     do
         scp -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@$IP:$FILE .
@@ -67,6 +69,11 @@ function backup() {
     rm $EXPFILE $BKPFILE
 }
 
+echo ""
+echo "#################################################"
+echo "Starting backup at $(date)"
+echo "#################################################"
+echo ""
 
 while read -r line
 do {
@@ -79,6 +86,8 @@ do {
             if  [ ! -d "${BACKUP_PATH}/${NAME}" ] ; then
                 mkdir -p ${BACKUP_PATH}/${NAME}
             fi
+            echo "### Starting backup for $NAME"
+
             backup "$IP" "${BACKUP_PATH}/${NAME}"
 
             # clean up old backups
@@ -88,3 +97,4 @@ do {
 # fix error with ssh eating up the action list
 } </dev/null    
 done < $CONF
+
